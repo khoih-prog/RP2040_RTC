@@ -65,7 +65,6 @@
 #endif
 
 #include <RP2040_RTC.h>
-//#include <WiFiWebServer.h>
 #include <WiFiNINA_Generic.h>
 
 char ssid[] = "****";        // your network SSID (name)
