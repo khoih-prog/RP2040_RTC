@@ -37,7 +37,7 @@
     * [1.3 SDK Function Documentation](#13-sdk-function-documentation)
   * [2. Library Functions](#2-library-functions)
     * [2.1 Typedef](#21-typedef)
-    * [2.2 Library Function List](#22-Library Function List)
+    * [2.2 Library Function List](#22-library-function-list)
 * [Examples](#examples)
   * [  1. RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet)
   * [  2. RP2040_RTC_Alarm_WiFiNINA](examples/Alarm/RP2040_RTC_Alarm_WiFiNINA)
@@ -53,7 +53,7 @@
   * [4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#4-rp2040_rtc_alarm_ethernet-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
     * [4.1 Repeatitive Alarm](#41-repeatitive-alarm)
     * [4.2 One-shot Alarm](#42-one-shot-alarm)
-  * [5. RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#4-rp2040_rtc_alarm_ethernet-on-mbed-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
+  * [5. RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#5-rp2040_rtc_alarm_ethernet-on-mbed-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
     * [5.1 Repeatitive Alarm](#51-repeatitive-alarm)
     * [5.2 One-shot Alarm](#52-one-shot-alarm)
   * [6. RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library](#6-rp2040_rtc_alarm_wifinina-on-mbed-nano_rp2040_connect-with-wifinina-using-wifinina_generic-library)
@@ -288,11 +288,11 @@ Get the current time from the RTC.
 
 **Parameters**
 
-• t Pointer to a datetime_t structure to receive the current RTC time
+• `t` : Pointer to a datetime_t structure to receive the current RTC time
 
 **Returns**
 
-• true if datetime is valid, false if the RTC is not running.
+• `true` if datetime is valid, `false` if the RTC is not running.
 
 
 #### rtc_init
@@ -315,9 +315,9 @@ Set a time in the future for the RTC to call a user provided callback.
 
 **Parameters**
 
-• t Pointer to a datetime_t structure containing a time in the future to fire the alarm. Any values set to -1 will not be
+• `t` : Pointer to a datetime_t structure containing a time in the future to fire the alarm. Any values set to -1 will not be
 matched on.
-• user_callback pointer to a rtc_callback_t to call when the alarm fires
+• `user_callback` : pointer to a `rtc_callback_t` to call when the alarm fires
 
 #### rtc_set_datetime
 
@@ -327,11 +327,11 @@ Set the RTC to the specified time.
 
 **Parameters**
 
-• t Pointer to a datetime_t structure contains time to set
+• `t` : Pointer to a datetime_t structure contains time to set
 
 **Returns**
 
-• true if set, false if the passed in datetime was invalid.
+• `true` if set, `false` if the passed in datetime was invalid.
 
 
 ####  datetime_to_str
@@ -342,9 +342,9 @@ Convert a datetime_t structure to a string.
 
 **Parameters**
 
-• buf character buffer to accept generated string
-• buf_size The size of the passed in buffer
-• t The datetime to be converted
+• `buf` : character buffer to accept generated string
+• `buf_size` : The size of the passed in buffer
+• `t` : The datetime to be converted
 
 ---
 
@@ -755,7 +755,7 @@ char pass[] = "****";        // your network password
 
 ### Debug Terminal Output Samples
 
-### 1. RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 1. RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
 The following is the sample terminal output when running example [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet) on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
@@ -797,7 +797,7 @@ The UTC time is 5:00:41
 
 ---
 
-### 2. RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 2. RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
 The following is the sample terminal output when running example [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet) on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
@@ -840,7 +840,7 @@ The UTC time is 5:03:20
 
 ---
 
-### 3. RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
+#### 3. RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
 
 The following is the sample terminal output when running example [RP2040_RTC_Time_WiFiNINA](examples/Time/RP2040_RTC_Time_WiFiNINA) on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
 
@@ -864,11 +864,11 @@ The UTC time is 5:20:44
 
 ---
 
-### 4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
 The following is the sample terminal output when running example [RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet) on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
-### 4.1. Repeatitive Alarm
+#### 4.1. Repeatitive Alarm
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
@@ -932,7 +932,7 @@ Alarm @ Saturday 14 June 6:27:05 2021
 Alarm @ Saturday 14 June 6:28:05 202
 ```
 
-### 4.2. One-shot Alarm
+#### 4.2. One-shot Alarm
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
@@ -978,11 +978,11 @@ Alarm @ Saturday 14 June 6:05:05 2021
 
 ---
 
-### 5. RP2040_RTC_Alarm_Ethernet on MBED on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 5. RP2040_RTC_Alarm_Ethernet on MBED on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
 The following is the sample terminal output when running example [RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet) on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
 
-### 5.1. Repeatitive Alarm
+#### 5.1. Repeatitive Alarm
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
@@ -1031,7 +1031,7 @@ Alarm @ Saturday 14 June 6:50:05 2021
 Alarm @ Saturday 14 June 6:51:05 2021
 ```
 
-### 5.2. One-shot Alarm
+#### 5.2. One-shot Alarm
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
@@ -1077,11 +1077,11 @@ Alarm @ Saturday 14 June 6:05:05 2021
 
 ---
 
-### 6. RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
+#### 6. RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
 
 The following is the sample terminal output when running example [RP2040_RTC_Alarm_WiFiNINA](examples/Alarm/RP2040_RTC_Alarm_WiFiNINA) on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
 
-### 6.1. Repeatitive Alarm
+#### 6.1. Repeatitive Alarm
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
@@ -1104,7 +1104,7 @@ Alarm @ Saturday 14 June 6:37:05 2021
 Alarm @ Saturday 14 June 6:38:05 2021
 ```
 
-### 6.2. One-shot Alarm
+#### 6.2. One-shot Alarm
 
 
 ```
