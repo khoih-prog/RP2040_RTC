@@ -65,8 +65,9 @@
 
 #include <RP2040_RTC.h>
 #include <WiFiNINA_Generic.h>
+//#include <WiFiNINA.h>
 
-char ssid[] = "****";        // your network SSID (name)
-char pass[] = "****";        // your network password
+char ssid[] = "ssid";        // your network SSID (name)
+char pass[] = "12345678";        // your network password
 
 #endif    //defines_h

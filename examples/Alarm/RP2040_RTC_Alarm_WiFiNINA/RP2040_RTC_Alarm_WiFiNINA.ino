@@ -6,11 +6,12 @@
   
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
-  Version: 1.0.0
-  
+  Version: 1.0.1
+
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0  K Hoang      13/06/2021 Initial release to support RP2040-based boards using internal RTC
+  1.0.1  K Hoang      14/06/2021 Add mbed_nano architecture to library.properties
  *****************************************************************************************************************************/
 
 #include "defines.h"
@@ -50,7 +51,7 @@ datetime_t alarmT;
 volatile bool alarmTriggered = false;
 
 #define ALARM_AT_SECONDS          5
-#define ALARM_REPEAT_FOREVER      false //true
+#define ALARM_REPEAT_FOREVER      true
 
 // This is ISR. Be careful. No Serial.print here.
 void rtcCallback()
