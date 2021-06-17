@@ -6,12 +6,13 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
-  Version: 1.0.1
+  Version: 1.0.2
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0  K Hoang      13/06/2021 Initial release to support RP2040-based boards using internal RTC
   1.0.1  K Hoang      14/06/2021 Add mbed_nano architecture to library.properties
+  1.0.2  K Hoang      16/06/2021 Fix bug in display alarm time
  *****************************************************************************************************************************/
 
 #include "defines.h"
@@ -438,6 +439,20 @@ void setAlarm()
   setAlarmDone = true;
 }
 
+void displayTime()
+{
+  rtc_get_datetime(&currTime);
+
+  // Display time from RTC
+  DateTime now = DateTime(currTime); 
+
+  time_t utc = now.get_time_t();
+  time_t local = myTZ->toLocal(utc, &tcr);
+
+  printDateTime(utc, "UTC");
+  printDateTime(local, tcr -> abbrev);
+}
+
 void displayRTCTime()
 {
   static unsigned long displayRTCTime_timeout = 0;
@@ -447,18 +462,8 @@ void displayRTCTime()
   // Send status report every STATUS_REPORT_INTERVAL (60) seconds: we don't need to display frequently.
   if ((millis() > displayRTCTime_timeout) || (displayRTCTime_timeout == 0))
   {
-    rtc_get_datetime(&currTime);
-
-    // Display time from RTC
-    DateTime now = DateTime(currTime);
-
     Serial.println("============================");
-
-    time_t utc = now.get_time_t();
-    time_t local = myTZ->toLocal(utc, &tcr);
-
-    printDateTime(utc, "UTC");
-    printDateTime(local, tcr -> abbrev);
+    displayTime();
 
     displayRTCTime_timeout = millis() + DISPLAY_RTC_INTERVAL;
   }
@@ -480,8 +485,9 @@ void loop()
   if (alarmTriggered)
   {
     alarmTriggered = false;
-    rtc_get_datetime(&currTime);
-    datetime_to_str(datetime_buf, sizeof(datetime_buf), &currTime);
-    Serial.print("Alarm @ "); Serial.println(datetime_buf);
+
+    Serial.println("============================");
+    Serial.println("Alarm @ ");
+    displayTime();
   }
 }

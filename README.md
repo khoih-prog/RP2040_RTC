@@ -17,6 +17,7 @@
   * [Currently supported Boards](#currently-supported-boards)
   * [Important Notes about ISR](#important-notes-about-isr)
 * [Changelog](#changelog)
+  * [Releases v1.0.2](#releases-v102)
   * [Releases v1.0.1](#releases-v101)
   * [Initial Releases v1.0.0](#initial-releases-v100)
 * [Prerequisites](#prerequisites)
@@ -128,6 +129,10 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 ## Changelog
 
+### Releases v1.0.2
+
+1. Fix bug in display alarm time due to buggy `datetime_to_str()` function
+
 ### Releases v1.0.1
 
 1. Fix `library.properties` to add `mbed_nano` architecture for **NANO_RP2040_CONNECT** using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed)
@@ -144,7 +149,10 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 1. [`Arduino IDE 1.8.15+` for Arduino](https://www.arduino.cc/en/Main/Software)
 2. [`Arduino mbed_rp2040 core 2.1.0+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-3. [`Earle Philhower's arduino-pico core v1.8.4+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+3. [`Earle Philhower's arduino-pico core v1.8.5+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+
+4. [`Timezone_Generic library v1.5.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
+
 
 ---
 ---
@@ -650,6 +658,20 @@ void setup()
   Udp.begin(localPort);
 }
 
+void displayTime()
+{
+  rtc_get_datetime(&currTime);
+
+  // Display time from RTC
+  DateTime now = DateTime(currTime); 
+
+  time_t utc = now.get_time_t();
+  time_t local = myTZ->toLocal(utc, &tcr);
+
+  printDateTime(utc, "UTC");
+  printDateTime(local, tcr -> abbrev);
+}
+
 void displayRTCTime()
 {
   static unsigned long displayRTCTime_timeout = 0;
@@ -658,20 +680,10 @@ void displayRTCTime()
 
   // Send status report every STATUS_REPORT_INTERVAL (60) seconds: we don't need to display frequently.
   if ((millis() > displayRTCTime_timeout) || (displayRTCTime_timeout == 0))
-  { 
-    rtc_get_datetime(&currTime);
-
-    // Display time from RTC
-    DateTime now = DateTime(currTime);
-  
+  {
     Serial.println("============================");
-  
-    time_t utc = now.get_time_t();
-    time_t local = myTZ->toLocal(utc, &tcr);
-    
-    printDateTime(utc, "UTC");
-    printDateTime(local, tcr -> abbrev);
-      
+    displayTime();
+
     displayRTCTime_timeout = millis() + DISPLAY_RTC_INTERVAL;
   }
 }
@@ -746,11 +758,10 @@ void loop()
 #endif
 
 #include <RP2040_RTC.h>
-//#include <WiFiWebServer.h>
 #include <WiFiNINA_Generic.h>
 
-char ssid[] = "****";        // your network SSID (name)
-char pass[] = "****";        // your network password
+char ssid[] = "ssid";             // your network SSID (name)
+char pass[] = "12345678";         // your network password
 
 #endif    //defines_h
 ```
@@ -766,7 +777,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -809,7 +820,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on  RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -851,7 +862,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -877,7 +888,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -897,51 +908,41 @@ MISO:16
 SCK:18
 SS:17
 =========================
-Using mac index = 1
-You're connected to the network, IP = 192.168.2.105
-============================
-00:00:00 Tue 31 Dec 2047 UTC
-19:00:00 Mon 30 Dec 2047 EST
+Using mac index = 2
+You're connected to the network, IP = 192.168.2.107
 Packet received
-Seconds since Jan 1 1900 = 3832640479
-Unix time = 1623651679
-The UTC time is 6:21:19
+Seconds since Jan 1 1900 = 3832883807
+Unix time = 1623895007
+The UTC time is 1:56:47
+============================
+01:56:48 Thu 17 Jun 2021 UTC
+21:56:48 Wed 16 Jun 2021 EDT
 Set Repeatitive Alarm @ alarmSeconds = 5
 ============================
-06:21:46 Mon 14 Jun 2021 UTC
-02:21:46 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:22:05 2021
+Alarm @ 
+01:57:05 Thu 17 Jun 2021 UTC
+21:57:05 Wed 16 Jun 2021 EDT
 ============================
-06:22:46 Mon 14 Jun 2021 UTC
-02:22:46 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:23:05 2021
+01:57:48 Thu 17 Jun 2021 UTC
+21:57:48 Wed 16 Jun 2021 EDT
 ============================
-06:23:46 Mon 14 Jun 2021 UTC
-02:23:46 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:24:05 2021
+Alarm @ 
+01:58:05 Thu 17 Jun 2021 UTC
+21:58:05 Wed 16 Jun 2021 EDT
 ============================
-06:24:46 Mon 14 Jun 2021 UTC
-02:24:46 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:25:05 2021
+01:58:48 Thu 17 Jun 2021 UTC
+21:58:48 Wed 16 Jun 2021 EDT
 ============================
-06:25:46 Mon 14 Jun 2021 UTC
-02:25:46 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:26:05 2021
-============================
-06:26:46 Mon 14 Jun 2021 UTC
-02:26:46 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:27:05 2021
-============================
-06:27:46 Mon 14 Jun 2021 UTC
-02:27:46 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:28:05 202
+Alarm @ 
+01:59:05 Thu 17 Jun 2021 UTC
+21:59:05 Wed 16 Jun 2021 EDT
 ```
 
 #### 4.2. One-shot Alarm
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -970,9 +971,11 @@ The UTC time is 6:04:14
 ============================
 06:04:15 Mon 14 Jun 2021 UTC
 02:04:15 Mon 14 Jun 2021 EDT
-Set Alarm @ Saturday 14 June 6:05:05 2021
 Set One-time Alarm @ alarmSeconds = 5
-Alarm @ Saturday 14 June 6:05:05 2021
+============================
+Alarm @ 
+06:05:05 Mon 14 Jun 2021 UTC
+02:05:05 Mon 14 Jun 2021 EDT
 ============================
 06:05:15 Mon 14 Jun 2021 UTC
 02:05:15 Mon 14 Jun 2021 EDT
@@ -991,7 +994,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -1021,26 +1024,38 @@ The UTC time is 6:47:27
 06:47:28 Mon 14 Jun 2021 UTC
 02:47:28 Mon 14 Jun 2021 EDT
 Set Repeatitive Alarm @ alarmSeconds = 5
-Alarm @ Saturday 14 June 6:48:05 2021
+============================
+Alarm @ 
+06:48:05 Mon 14 Jun 2021 UTC
+02:48:05 Mon 14 Jun 2021 EDT
 ============================
 06:48:28 Mon 14 Jun 2021 UTC
 02:48:28 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:49:05 2021
+============================
+Alarm @ 
+06:49:05 Mon 14 Jun 2021 UTC
+02:49:05 Mon 14 Jun 2021 EDT
 ============================
 06:49:28 Mon 14 Jun 2021 UTC
 02:49:28 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:50:05 2021
+============================
+Alarm @ 
+06:50:05 Mon 14 Jun 2021 UTC
+02:50:05 Mon 14 Jun 2021 EDT
 ============================
 06:50:28 Mon 14 Jun 2021 UTC
 02:50:28 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:51:05 2021
+============================
+Alarm @ 
+06:51:05 Mon 14 Jun 2021 UTC
+02:51:05 Mon 14 Jun 2021 EDT
 ```
 
 #### 5.2. One-shot Alarm
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -1069,9 +1084,12 @@ The UTC time is 6:04:14
 ============================
 06:04:15 Mon 14 Jun 2021 UTC
 02:04:15 Mon 14 Jun 2021 EDT
-Set Alarm @ Saturday 14 June 6:05:05 2021
+
 Set One-time Alarm @ alarmSeconds = 5
-Alarm @ Saturday 14 June 6:05:05 2021
+============================
+Alarm @ 
+06:05:05 Mon 14 Jun 2021 UTC
+02:05:05 Mon 14 Jun 2021 EDT
 ============================
 06:05:15 Mon 14 Jun 2021 UTC
 02:05:15 Mon 14 Jun 2021 EDT
@@ -1090,23 +1108,32 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
 Packet received
-Seconds since Jan 1 1900 = 3832641394
-Unix time = 1623652594
-The UTC time is 6:36:34
+Seconds since Jan 1 1900 = 3832884378
+Unix time = 1623895578
+The UTC time is 2:06:18
 ============================
-06:36:35 Mon 14 Jun 2021 UTC
-02:36:35 Mon 14 Jun 2021 EDT
+02:06:19 Thu 17 Jun 2021 UTC
+22:06:19 Wed 16 Jun 2021 EDT
 Set Repeatitive Alarm @ alarmSeconds = 5
-Alarm @ Saturday 14 June 6:37:05 2021
 ============================
-06:37:35 Mon 14 Jun 2021 UTC
-02:37:35 Mon 14 Jun 2021 EDT
-Alarm @ Saturday 14 June 6:38:05 2021
+Alarm @ 
+02:07:05 Thu 17 Jun 2021 UTC
+22:07:05 Wed 16 Jun 2021 EDT
+============================
+02:07:19 Thu 17 Jun 2021 UTC
+22:07:19 Wed 16 Jun 2021 EDT
+============================
+Alarm @ 
+02:08:05 Thu 17 Jun 2021 UTC
+22:08:05 Wed 16 Jun 2021 EDT
+============================
+02:08:19 Thu 17 Jun 2021 UTC
+22:08:19 Wed 16 Jun 2021 EDT
 ```
 
 #### 6.2. One-shot Alarm
@@ -1114,22 +1141,27 @@ Alarm @ Saturday 14 June 6:38:05 2021
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.1
+RP2040_RTC v1.0.2
 Timezone_Generic v1.5.0
+Please upgrade the firmware
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
 Packet received
-Seconds since Jan 1 1900 = 3832641620
-Unix time = 1623652820
-The UTC time is 6:40:20
+Seconds since Jan 1 1900 = 3832885266
+Unix time = 1623896466
+The UTC time is 2:21:06
 ============================
-06:40:21 Mon 14 Jun 2021 UTC
-02:40:21 Mon 14 Jun 2021 EDT
+02:21:07 Thu 17 Jun 2021 UTC
+22:21:07 Wed 16 Jun 2021 EDT
 Set One-time Alarm @ alarmSeconds = 5
-Alarm @ Saturday 14 June 6:41:05 2021
 ============================
-06:41:21 Mon 14 Jun 2021 UTC
-02:41:21 Mon 14 Jun 2021 EDT
+Alarm @ 
+02:22:05 Thu 17 Jun 2021 UTC
+22:22:05 Wed 16 Jun 2021 EDT
+============================
+02:22:07 Thu 17 Jun 2021 UTC
+22:22:07 Wed 16 Jun 2021 EDT
+
 ```
 
 ---
@@ -1146,6 +1178,10 @@ Sometimes, the library will only work if you update the board core to the latest
 ---
 
 ## Releases
+
+### Releases v1.0.2
+
+1. Fix bug in display alarm time due to buggy `datetime_to_str()` function
 
 ### Releases v1.0.1
 

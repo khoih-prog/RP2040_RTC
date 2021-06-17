@@ -15,7 +15,7 @@
 
 // Debug Level from 0 to 4
 #define _WIFI_LOGLEVEL_             3
-#define _WIFININA_LOGLEVEL_         3
+#define _WIFININA_LOGLEVEL_         4
 
 #define USE_WIFI_NINA         true
 //#define USE_WIFI_NINA         false
@@ -65,9 +65,8 @@
 
 #include <RP2040_RTC.h>
 #include <WiFiNINA_Generic.h>
-//#include <WiFiNINA.h>
 
-char ssid[] = "ssid";        // your network SSID (name)
-char pass[] = "12345678";        // your network password
+char ssid[] = "ssid";             // your network SSID (name)
+char pass[] = "12345678";         // your network password
 
 #endif    //defines_h

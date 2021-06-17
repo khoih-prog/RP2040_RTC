@@ -5,12 +5,13 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
-  Version: 1.0.1
+  Version: 1.0.2
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0  K Hoang      13/06/2021 Initial release to support RP2040-based boards using internal RTC
   1.0.1  K Hoang      14/06/2021 Add mbed_nano architecture to library.properties
+  1.0.2  K Hoang      16/06/2021 Fix bug in display alarm time
 *****************************************************************************************************************************/
 
 #pragma once
@@ -18,7 +19,7 @@
 #ifndef RP2040_RTC_H
 #define RP2040_RTC_H
 
-#define RP2040_RTC_VERSION      "RP2040_RTC v1.0.1"
+#define RP2040_RTC_VERSION      "RP2040_RTC v1.0.2"
 
 extern "C" 
 {
