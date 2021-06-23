@@ -28,7 +28,7 @@ Please ensure to specify the following:
 
 ```
 Arduino IDE version: 1.8.15
-Arduino-mbed RP2040 v2.1.0
+Arduino-mbed RP2040 v2.2.0
 NANO_RP2040_CONNECT Module
 OS: Ubuntu 20.04 LTS
 Linux xy-Inspiron-3593 5.4.0-74-generic #83-Ubuntu SMP Sat May 8 02:35:39 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux

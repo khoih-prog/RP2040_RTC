@@ -1,6 +1,6 @@
 {
   "name": "RP2040_RTC",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": "timing, device, rtc, control, timer, interrupt, alarm, utc, ntp, isr, isr-based, hardware-timer, mission-critical, accuracy, precise, non-blocking, mbed, rpi-pico, rp2040, nano-rp2040-connect",
   "description": "This library enables you to use RTC from RP2040-based boards such as Nano_RP2040_Connect, RASPBERRY_PI_PICO. This RP204-based RTC, using Interrupt, has no battery backup. Time will be lost when powered down. To need NTP-client to update RTC every start-up.",
   "authors":
