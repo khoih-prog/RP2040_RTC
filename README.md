@@ -17,6 +17,7 @@
   * [Currently supported Boards](#currently-supported-boards)
   * [Important Notes about ISR](#important-notes-about-isr)
 * [Changelog](#changelog)
+  * [Releases v1.0.4](#releases-v104)
   * [Releases v1.0.3](#releases-v103)
   * [Releases v1.0.2](#releases-v102)
   * [Releases v1.0.1](#releases-v101)
@@ -132,6 +133,10 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 ## Changelog
 
+### Releases v1.0.4
+
+1. Using TimeLib instead of Time to avoid case-insensitive issue with Windows and MacOS.
+
 ### Releases v1.0.3
 
 1. Add simple examples with manual time input
@@ -156,7 +161,7 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 1. [`Arduino IDE 1.8.15+` for Arduino](https://www.arduino.cc/en/Main/Software)
 2. [`Arduino mbed_rp2040 core 2.2.0+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-3. [`Earle Philhower's arduino-pico core v1.8.6+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+3. [`Earle Philhower's arduino-pico core v1.8.8+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 
 4. [`Timezone_Generic library v1.5.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
 5. [`WiFiNINA_Generic library v1.8.11+`](https://github.com/khoih-prog/WiFiNINA_Generic) to use WiFiNINA modules/shields. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic) if using `WiFiNINA_Generic` library for Nano-RP2040-Connect boards.
@@ -793,7 +798,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -836,7 +841,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on  RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -878,7 +883,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -904,7 +909,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -958,7 +963,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -1010,7 +1015,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -1071,7 +1076,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -1124,7 +1129,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -1157,7 +1162,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.3
+RP2040_RTC v1.0.4
 Timezone_Generic v1.5.0
 Please upgrade the firmware
 Connecting to WPA SSID: HueNet1
@@ -1194,6 +1199,10 @@ Sometimes, the library will only work if you update the board core to the latest
 ---
 
 ## Releases
+
+### Releases v1.0.4
+
+1. Using TimeLib instead of Time to avoid case-insensitive issue with Windows and MacOS.
 
 ### Releases v1.0.3
 
@@ -1241,6 +1250,13 @@ Submit issues to: [RP2040_RTC issues](https://github.com/khoih-prog/RP2040_RTC/i
 
 Many thanks for everyone for bug reporting, new feature suggesting, testing and contributing to the development of this library.
 
+1. Thanks to [kenb2054](https://forum.arduino.cc/u/kenb2054) to report bugs in [Libraries updated to support new RP2040-based boards (RASPBERRY_PI_PICO, etc.) #43](https://forum.arduino.cc/t/libraries-updated-to-support-new-rp2040-based-boards-raspberry-pi-pico-etc/860353/43) leading to v1.0.4
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/kenb2054"><img src="https://avatars.discourse-cdn.com/v4/letter/k/b5e925/120.png" width="100px;" alt="kenb2054"/><br /><sub><b>kenb2054</b></sub></a><br /></td>
+  </tr> 
+</table>
 
 ---
 
