@@ -6,7 +6,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
-  Version: 1.0.4
+  Version: 1.0.5
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -15,6 +15,7 @@
   1.0.2  K Hoang      16/06/2021 Fix bug in display alarm time
   1.0.3  K Hoang      23/06/2021 Add simple example with manual time input
   1.0.4  K Hoang      26/06/2021 Using TimeLib instead of Time
+  1.0.5  K Hoang      30/09/2021 Fix examples' issue with Nano_RP2040_Connect
  *****************************************************************************************************************************/
  
 #pragma once
@@ -439,6 +440,18 @@ class DateTime
 
 #if ( defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_ADAFRUIT_FEATHER_RP2040) || defined(ARDUINO_GENERIC_RP2040) )
 
+/*
+typedef struct {
+    int16_t year;    ///< 0..4095
+    int8_t month;    ///< 1..12, 1 is January
+    int8_t day;      ///< 1..28,29,30,31 depending on month
+    int8_t dotw;     ///< 0..6, 0 is Sunday
+    int8_t hour;     ///< 0..23
+    int8_t min;      ///< 0..59
+    int8_t sec;      ///< 0..59
+} datetime_t;
+*/
+
   bool rtc_set_datetime(DateTime dt) 
   {
     datetime_t tm;
@@ -449,6 +462,15 @@ class DateTime
     tm.hour   = dt.hour();
     tm.min    = dt.minute();
     tm.sec    = dt.second();
+
+#if RTC_DEBUG    
+    Serial.print("Year = "); Serial.print(tm.year);
+    Serial.print(", Mo = "); Serial.print(tm.month);
+    Serial.print(", day = "); Serial.print(tm.day);
+    Serial.print(", hour = "); Serial.print(tm.hour);
+    Serial.print(", min = "); Serial.print(tm.min);
+    Serial.print(", sec = "); Serial.println(tm.sec);
+#endif   
     
     return (rtc_set_datetime(&tm));
   }

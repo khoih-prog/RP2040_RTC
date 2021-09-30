@@ -5,7 +5,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
-  Version: 1.0.4
+  Version: 1.0.5
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -14,6 +14,7 @@
   1.0.2  K Hoang      16/06/2021 Fix bug in display alarm time
   1.0.3  K Hoang      23/06/2021 Add simple example with manual time input
   1.0.4  K Hoang      26/06/2021 Using TimeLib instead of Time
+  1.0.5  K Hoang      30/09/2021 Fix examples' issue with Nano_RP2040_Connect
 *****************************************************************************************************************************/
 
 #pragma once
@@ -21,7 +22,11 @@
 #ifndef RP2040_RTC_H
 #define RP2040_RTC_H
 
-#define RP2040_RTC_VERSION      "RP2040_RTC v1.0.4"
+#define RP2040_RTC_VERSION      "RP2040_RTC v1.0.5"
+
+#if !defined(RTC_DEBUG)
+  #define RTC_DEBUG     false
+#endif
 
 extern "C" 
 {

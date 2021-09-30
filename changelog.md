@@ -11,129 +11,55 @@
 
 ## Table of Contents
 
-* [Why do we need this RP2040_RTC library](#why-do-we-need-this-rp2040_rtc-library)
-  * [Features](#features)
-  * [Why using ISR-based Alarm is better](#why-using-isr-based-alarm-is-better)
-  * [Currently supported Boards](#currently-supported-boards)
-  * [Important Notes about ISR](#important-notes-about-isr)
-* [Changelog](changelog.md)
-* [Prerequisites](#prerequisites)
-* [Installation](#installation)
-  * [Use Arduino Library Manager](#use-arduino-library-manager)
-  * [Manual Install](#manual-install)
-  * [VS Code & PlatformIO](#vs-code--platformio)
-* [Libraries' Patches](#libraries-patches)
-  * [1. For application requiring 2K+ HTML page](#1-for-application-requiring-2k-html-page)
-  * [2. For Ethernet library](#2-for-ethernet-library)
-  * [3. For EthernetLarge library](#3-for-ethernetlarge-library)
-  * [4. For Etherne2 library](#4-for-ethernet2-library)
-  * [5. For Ethernet3 library](#5-for-ethernet3-library)
-  * [6. For UIPEthernet library](#6-for-uipethernet-library)
-* [Usage](#usage)
-  * [1. Raspberry Pi Pico C/C++ SDK](#1-raspberry-pi-pico-cc++-sdk)
-    * [1.1 Typedef](#11-typedef)
-    * [1.2 SDK Function List](#12-sdk-function-list)
-    * [1.3 SDK Function Documentation](#13-sdk-function-documentation)
-  * [2. Library Functions](#2-library-functions)
-    * [2.1 Typedef](#21-typedef)
-    * [2.2 Library Function List](#22-library-function-list)
-* [Examples](#examples)
-  * [ 1. RP2040_RTC_Alarm](examples/Alarm/RP2040_RTC_Alarm)
-  * [ 2. RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet)
-  * [ 3. RP2040_RTC_Alarm_WiFiNINA](examples/Alarm/RP2040_RTC_Alarm_WiFiNINA)
-  * [ 4. RP2040_RTC_Time](examples/Time/RP2040_RTC_Time)
-  * [ 5. RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet)
-  * [ 6. RP2040_RTC_Time_WiFiNINA](examples/Time/RP2040_RTC_Time_WiFiNINA)
-* [Example RP2040_RTC_Time_WiFiNINA](#example-rp2040_rtc_time_wifinina)
-  * [ 1. File RP2040_RTC_Time_WiFiNINA.ino](#1-file-rp2040_rtc_time_wifininaino)
-  * [ 2. File defines.h](#2-file-definesh)
-* [Debug Terminal Output Samples](#debug-terminal-output-samples)
-  * [1. RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#1-rp2040_rtc_time_ethernet-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
-  * [2. RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#2-rp2040_rtc_time_ethernet-on-mbed-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
-  * [3. RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library](#3-rp2040_rtc_time_wifinina-on-mbed-nano_rp2040_connect-with-wifinina-using-wifinina_generic-library)
-  * [4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#4-rp2040_rtc_alarm_ethernet-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
-    * [4.1 Repeatitive Alarm](#41-repeatitive-alarm)
-    * [4.2 One-shot Alarm](#42-one-shot-alarm)
-  * [5. RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#5-rp2040_rtc_alarm_ethernet-on-mbed-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
-    * [5.1 Repeatitive Alarm](#51-repeatitive-alarm)
-    * [5.2 One-shot Alarm](#52-one-shot-alarm)
-  * [6. RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library](#6-rp2040_rtc_alarm_wifinina-on-mbed-nano_rp2040_connect-with-wifinina-using-wifinina_generic-library)
-    * [6.1 Repeatitive Alarm](#61-repeatitive-alarm)
-    * [6.2 One-shot Alarm](#62-one-shot-alarm)
-* [Troubleshooting](#troubleshooting)
-* [Issues](#issues)
-* [TO DO](#to-do)
-* [DONE](#done)
-* [Contributions and Thanks](#contributions-and-thanks)
-* [Contributing](#contributing)
-* [License](#license)
-* [Copyright](#copyright)
+* [Changelog](#changelog)
+  * [Releases v1.0.5](#releases-v105)
+  * [Releases v1.0.4](#releases-v104)
+  * [Releases v1.0.3](#releases-v103)
+  * [Releases v1.0.2](#releases-v102)
+  * [Releases v1.0.1](#releases-v101)
+  * [Initial Releases v1.0.0](#initial-releases-v100)
 
 ---
 ---
 
-### Why do we need this [RP2040_RTC library](https://github.com/khoih-prog/RP2040_RTC)
+## Changelog
 
-## Features
+### Releases v1.0.5
 
-This is an Arduino library for **RP2040-based RTC**
+1. Fix examples' issue with Nano_RP2040_Connect
 
-```
-The RTC keeps track of time in human readable format and generates events when the time is equal to a preset value.
-Think of a digital clock, not epoch time used by most computers. There are seven fields, one each for year (12 bit),
-month (4 bit), day (5 bit), day of the week (3 bit), hour (5 bit) minute (6 bit) and second (6 bit), storing the data in binary
-format.
-```
+### Releases v1.0.4
 
-The examples will demonstrate how to get the UTC time from NTP server, then update the RTC to make sure the time is perfectly correct.
+1. Using TimeLib instead of Time to avoid case-insensitive issue with Windows and MacOS.
 
+### Releases v1.0.3
 
-### Why using ISR-based Alarm is better
+1. Add simple examples with manual time input
 
-Imagine you have a system with a **mission-critical** function, measuring water level and control the sump pump or doing something much more important. You normally use a software timer to poll, or even place the function in loop(). But what if another function is **blocking** the loop() or setup().
+### Releases v1.0.2
 
-So your function **might not be executed, and the result would be disastrous.**
+1. Fix bug in display alarm time due to buggy `datetime_to_str()` function
 
-You'd prefer to have your function called, no matter what happening with other functions (busy loop, bug, etc.).
+### Releases v1.0.1
 
-The correct choice is to use an ISR-based Alarm with **Interrupt** to call your function.
+1. Fix `library.properties` to add `mbed_nano` architecture for **NANO_RP2040_CONNECT** using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed)
 
-These ISR-based Alarm, using interrupt, still work even if other functions are blocking. Moreover, they are much more **precise** (certainly depending on clock frequency accuracy) than other software timers using millis() or micros(). That's necessary if you need to measure some data requiring better accuracy.
+### Initial Releases v1.0.0
 
-Functions using normal software timers, relying on loop() and calling millis(), won't work if the loop() or setup() is blocked by certain operation. For example, certain function is blocking while it's connecting to WiFi or some services.
+1. Initial coding to support RP2040-based boards such as **NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico core**](https://github.com/earlephilhower/arduino-pico).
 
-The catch is **your function is now part of an ISR (Interrupt Service Routine), and must be lean / mean, and follow certain rules.** More to read on:
-
-[**HOWTO Attach Interrupt**](https://www.arduino.cc/reference/en/language/functions/external-interrupts/attachinterrupt/)
-
----
-
-### Currently supported Boards
-
-1. RP2040-based boards such as **NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc.
-
----
-
-### Important Notes about ISR
-
-1. Inside the attached function, **delay() won’t work and the value returned by millis() will not increment.** Serial data received while in the function may be lost. You should declare as **volatile any variables that you modify within the attached function.**
-
-2. Typically global variables are used to pass data between an ISR and the main program. To make sure variables shared between an ISR and the main program are updated correctly, declare them as volatile.
-
-3. Don't use Serial.print(ln) function inside ISR or system will hang up.
 
 ---
 ---
-
 
 ## Prerequisites
 
-1. [`Arduino IDE 1.8.16+` for Arduino](https://www.arduino.cc/en/Main/Software)
-2. [`Arduino mbed_rp2040 core 2.5.2+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-3. [`Earle Philhower's arduino-pico core v1.9.5+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+1. [`Arduino IDE 1.8.15+` for Arduino](https://www.arduino.cc/en/Main/Software)
+2. [`Arduino mbed_rp2040 core 2.2.0+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+3. [`Earle Philhower's arduino-pico core v1.8.8+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 
-4. [`Timezone_Generic library v1.7.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
-5. [`WiFiNINA_Generic library v1.8.13+`](https://github.com/khoih-prog/WiFiNINA_Generic) to use WiFiNINA modules/shields. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic) if using `WiFiNINA_Generic` library for Nano-RP2040-Connect boards.
+4. [`Timezone_Generic library v1.5.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
+5. [`WiFiNINA_Generic library v1.8.11+`](https://github.com/khoih-prog/WiFiNINA_Generic) to use WiFiNINA modules/shields. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic) if using `WiFiNINA_Generic` library for Nano-RP2040-Connect boards.
 
 6. Depending on which Ethernet card/module/shield you're using:
    - [`Ethernet library v2.0.0+`](https://github.com/arduino-libraries/Ethernet) for W5100, W5200 and W5500.  [![GitHub release](https://img.shields.io/github/release/arduino-libraries/Ethernet.svg)](https://github.com/arduino-libraries/Ethernet/releases/latest)
@@ -552,17 +478,11 @@ void getNTPTime()
       //rtc_set_datetime( DateTime((uint32_t) epoch) );
 
       // New function in DateTime_Generic.h
-
-      // To be called before while loop to work. Why ???
-      rtc_set_datetime(DateTime((uint32_t) epoch));
-
-      uint8_t loopCount = 0;
-
-      while( (loopCount++ < 10 ) && ( ! rtc_set_datetime(DateTime((uint32_t) epoch)) ) )
+      while( ! rtc_set_datetime(DateTime((uint32_t) epoch)) )
       {
         Serial.println(F("rtc_set_datetime failed"));
-        sleep_ms(500);
-      }
+        sleep_ms(1);
+      }     
       
       // print the hour, minute and second:
       Serial.print(F("The UTC time is "));        // UTC is the time at Greenwich Meridian (GMT)
@@ -703,13 +623,11 @@ void loop()
 #define DEBUG_WIFI_WEBSERVER_PORT   Serial
 
 // Debug Level from 0 to 4
-#define _WIFI_LOGLEVEL_             1
-#define _WIFININA_LOGLEVEL_         1
+#define _WIFI_LOGLEVEL_             3
+#define _WIFININA_LOGLEVEL_         3
 
 #define USE_WIFI_NINA         true
 //#define USE_WIFI_NINA         false
-
-#define RTC_DEBUG             false
 
 
 #if USE_WIFI_NINA
@@ -775,8 +693,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -798,16 +716,15 @@ SS:17
 Using mac index = 10
 You're connected to the network, IP = 192.168.2.94
 Packet received
-Seconds since Jan 1 1900 = 3841997162
-Unix time = 1633008362
-The UTC time is 13:26:02
+Seconds since Jan 1 1900 = 3832635641
+Unix time = 1623646841
+The UTC time is 5:00:41
 ============================
-13:26:03 Thu 30 Sep 2021 UTC
-09:26:03 Thu 30 Sep 2021 EDT
+05:00:42 Mon 14 Jun 2021 UTC
+01:00:42 Mon 14 Jun 2021 EDT
 ============================
-13:27:03 Thu 30 Sep 2021 UTC
-09:27:03 Thu 30 Sep 2021 EDT
-
+05:01:42 Mon 14 Jun 2021 UTC
+01:01:42 Mon 14 Jun 2021 EDT
 ```
 
 ---
@@ -819,8 +736,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on  RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 3
@@ -842,16 +759,15 @@ SS:5
 Using mac index = 19
 You're connected to the network, IP = 192.168.2.104
 Packet received
-Seconds since Jan 1 1900 = 3841997162
-Unix time = 1633008362
-The UTC time is 13:26:02
+Seconds since Jan 1 1900 = 3832635800
+Unix time = 1623647000
+The UTC time is 5:03:20
 ============================
-13:26:03 Thu 30 Sep 2021 UTC
-09:26:03 Thu 30 Sep 2021 EDT
+05:03:21 Mon 14 Jun 2021 UTC
+01:03:21 Mon 14 Jun 2021 EDT
 ============================
-13:27:03 Thu 30 Sep 2021 UTC
-09:27:03 Thu 30 Sep 2021 EDT
-
+05:04:21 Mon 14 Jun 2021 UTC
+01:04:21 Mon 14 Jun 2021 EDT
 ```
 
 ---
@@ -862,21 +778,20 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
 Packet received
-Seconds since Jan 1 1900 = 3841997162
-Unix time = 1633008362
-The UTC time is 13:26:02
+Seconds since Jan 1 1900 = 3832636844
+Unix time = 1623648044
+The UTC time is 5:20:44
 ============================
-13:26:03 Thu 30 Sep 2021 UTC
-09:26:03 Thu 30 Sep 2021 EDT
+05:20:45 Mon 14 Jun 2021 UTC
+01:20:45 Mon 14 Jun 2021 EDT
 ============================
-13:27:03 Thu 30 Sep 2021 UTC
-09:27:03 Thu 30 Sep 2021 EDT
-
+05:21:45 Mon 14 Jun 2021 UTC
+01:21:45 Mon 14 Jun 2021 EDT
 ```
 
 ---
@@ -889,8 +804,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -912,36 +827,39 @@ SS:17
 Using mac index = 2
 You're connected to the network, IP = 192.168.2.107
 Packet received
-Seconds since Jan 1 1900 = 3841974368
-Unix time = 1632985568
-The UTC time is 7:06:08
+Seconds since Jan 1 1900 = 3832883807
+Unix time = 1623895007
+The UTC time is 1:56:47
 ============================
-07:06:09 Thu 30 Sep 2021 UTC
-03:06:09 Thu 30 Sep 2021 EDT
+01:56:48 Thu 17 Jun 2021 UTC
+21:56:48 Wed 16 Jun 2021 EDT
 Set Repeatitive Alarm @ alarmSeconds = 5
 ============================
 Alarm @ 
-07:07:05 Thu 30 Sep 2021 UTC
-03:07:05 Thu 30 Sep 2021 EDT
+01:57:05 Thu 17 Jun 2021 UTC
+21:57:05 Wed 16 Jun 2021 EDT
 ============================
-07:07:09 Thu 30 Sep 2021 UTC
-03:07:09 Thu 30 Sep 2021 EDT
+01:57:48 Thu 17 Jun 2021 UTC
+21:57:48 Wed 16 Jun 2021 EDT
 ============================
 Alarm @ 
-07:08:05 Thu 30 Sep 2021 UTC
-03:08:05 Thu 30 Sep 2021 EDT
+01:58:05 Thu 17 Jun 2021 UTC
+21:58:05 Wed 16 Jun 2021 EDT
 ============================
-07:08:09 Thu 30 Sep 2021 UTC
-03:08:09 Thu 30 Sep 2021 EDT
+01:58:48 Thu 17 Jun 2021 UTC
+21:58:48 Wed 16 Jun 2021 EDT
 ============================
+Alarm @ 
+01:59:05 Thu 17 Jun 2021 UTC
+21:59:05 Wed 16 Jun 2021 EDT
 ```
 
 #### 4.2. One-shot Alarm
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -992,8 +910,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 3
@@ -1053,8 +971,8 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1106,8 +1024,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
 Packet received
@@ -1139,8 +1057,8 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.4
+Timezone_Generic v1.5.0
 Please upgrade the firmware
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -1175,6 +1093,30 @@ Sometimes, the library will only work if you update the board core to the latest
 ---
 ---
 
+## Releases
+
+### Releases v1.0.4
+
+1. Using TimeLib instead of Time to avoid case-insensitive issue with Windows and MacOS.
+
+### Releases v1.0.3
+
+1. Add simple examples with manual time input
+
+### Releases v1.0.2
+
+1. Fix bug in display alarm time due to buggy `datetime_to_str()` function
+
+### Releases v1.0.1
+
+1. Fix `library.properties` to add `mbed_nano` architecture for **NANO_RP2040_CONNECT** using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed)
+
+### Initial Releases v1.0.0
+
+1. Initial coding to support RP2040-based boards such as **NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico core**](https://github.com/earlephilhower/arduino-pico).
+
+---
+---
 
 ### Issues
 
@@ -1204,12 +1146,10 @@ Submit issues to: [RP2040_RTC issues](https://github.com/khoih-prog/RP2040_RTC/i
 Many thanks for everyone for bug reporting, new feature suggesting, testing and contributing to the development of this library.
 
 1. Thanks to [kenb2054](https://github.com/kenb2054) to report bugs in [Libraries updated to support new RP2040-based boards (RASPBERRY_PI_PICO, etc.) #43](https://forum.arduino.cc/t/libraries-updated-to-support-new-rp2040-based-boards-raspberry-pi-pico-etc/860353/43) leading to v1.0.4
-2. Thanks to [josephchrzempiec](https://github.com/josephchrzempiec) to report bugs leading to v1.0.5
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/kenb2054"><img src="https://github.com/kenb2054.png" width="100px;" alt="kenb2054"/><br /><sub><b>kenb2054</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/josephchrzempiec"><img src="https://github.com/josephchrzempiec.png" width="100px;" alt="josephchrzempiec"/><br /><sub><b>josephchrzempiec</b></sub></a><br /></td>
   </tr> 
 </table>
 

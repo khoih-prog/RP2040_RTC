@@ -3,10 +3,10 @@
   
   For RP2040-based boards using internal RTC
   with WiFiNINA, ESP8266/ESP32 WiFi, ESP8266-AT, W5x00, ENC28J60, LAN8742A Ethernet modules/shields
-  
+
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
-  Version: 1.0.4
+  Version: 1.0.5
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -15,6 +15,7 @@
   1.0.2  K Hoang      16/06/2021 Fix bug in display alarm time
   1.0.3  K Hoang      23/06/2021 Add simple example with manual time input
   1.0.4  K Hoang      26/06/2021 Using TimeLib instead of Time
+  1.0.5  K Hoang      30/09/2021 Fix examples' issue with Nano_RP2040_Connect
  *****************************************************************************************************************************/
 
 // Important notes: Currently, RP2040-based boards RTC has no battery backup. So the time will be lost when power down
@@ -142,11 +143,17 @@ void getNTPTime()
       //rtc_set_datetime( DateTime((uint32_t) epoch) );
 
       // New function in DateTime_Generic.h
-      while( ! rtc_set_datetime(DateTime((uint32_t) epoch)) )
+
+      // To be called before while loop to work. Why ???
+      rtc_set_datetime(DateTime((uint32_t) epoch));
+
+      uint8_t loopCount = 0;
+
+      while( (loopCount++ < 10 ) && ( ! rtc_set_datetime(DateTime((uint32_t) epoch)) ) )
       {
         Serial.println(F("rtc_set_datetime failed"));
-        sleep_ms(1);
-      }     
+        sleep_ms(500);
+      }
       
       // print the hour, minute and second:
       Serial.print(F("The UTC time is "));        // UTC is the time at Greenwich Meridian (GMT)
