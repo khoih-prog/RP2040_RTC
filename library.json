@@ -23,7 +23,7 @@
     ]
   },
   "frameworks": "*",
-  "platforms": ["rp2040", "mbed_rp2040", "mbed_nano"],
+  "platforms": ["raspberrypi"],
   "examples": "examples/*/*/*.ino",
   "license": "MIT"
 }
