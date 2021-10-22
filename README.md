@@ -132,7 +132,7 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 2. [`Arduino mbed_rp2040 core 2.5.2+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
 3. [`Earle Philhower's arduino-pico core v1.9.5+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 
-4. [`Timezone_Generic library v1.7.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
+4. [`Timezone_Generic library v1.7.1+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
 5. [`WiFiNINA_Generic library v1.8.13+`](https://github.com/khoih-prog/WiFiNINA_Generic) to use WiFiNINA modules/shields. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic) if using `WiFiNINA_Generic` library for Nano-RP2040-Connect boards.
 
 6. Depending on which Ethernet card/module/shield you're using:
@@ -775,8 +775,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -819,8 +819,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on  RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 3
@@ -862,8 +862,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
 Packet received
@@ -889,8 +889,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -940,8 +940,8 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -992,8 +992,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 3
@@ -1053,8 +1053,8 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1106,8 +1106,8 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
 Packet received
@@ -1139,8 +1139,8 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.5
-Timezone_Generic v1.7.0
+RP2040_RTC v1.0.6
+Timezone_Generic v1.7.1
 Please upgrade the firmware
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -1205,11 +1205,13 @@ Many thanks for everyone for bug reporting, new feature suggesting, testing and 
 
 1. Thanks to [kenb2054](https://github.com/kenb2054) to report bugs in [Libraries updated to support new RP2040-based boards (RASPBERRY_PI_PICO, etc.) #43](https://forum.arduino.cc/t/libraries-updated-to-support-new-rp2040-based-boards-raspberry-pi-pico-etc/860353/43) leading to v1.0.4
 2. Thanks to [josephchrzempiec](https://github.com/josephchrzempiec) to report bugs leading to v1.0.5
+3. Thanks to [josephchrzempiec](https://github.com/josephchrzempiec) to create the PR [Correct platform name #2](https://github.com/khoih-prog/RP2040_RTC/pull/2) leading to v1.0.6
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/kenb2054"><img src="https://github.com/kenb2054.png" width="100px;" alt="kenb2054"/><br /><sub><b>kenb2054</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/josephchrzempiec"><img src="https://github.com/josephchrzempiec.png" width="100px;" alt="josephchrzempiec"/><br /><sub><b>josephchrzempiec</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/maxgerhardt"><img src="https://github.com/maxgerhardt.png" width="100px;" alt="maxgerhardt"/><br /><sub><b>Maximilian Gerhardt</b></sub></a><br /></td>
   </tr> 
 </table>
 

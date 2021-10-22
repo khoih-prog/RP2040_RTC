@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.0.6](#releases-v106)
   * [Releases v1.0.5](#releases-v105)
   * [Releases v1.0.4](#releases-v104)
   * [Releases v1.0.3](#releases-v103)
@@ -23,6 +24,10 @@
 ---
 
 ## Changelog
+
+### Releases v1.0.6
+
+1. Fix platform in `library.json`
 
 ### Releases v1.0.5
 
