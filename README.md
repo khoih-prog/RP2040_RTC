@@ -1205,7 +1205,7 @@ Many thanks for everyone for bug reporting, new feature suggesting, testing and 
 
 1. Thanks to [kenb2054](https://github.com/kenb2054) to report bugs in [Libraries updated to support new RP2040-based boards (RASPBERRY_PI_PICO, etc.) #43](https://forum.arduino.cc/t/libraries-updated-to-support-new-rp2040-based-boards-raspberry-pi-pico-etc/860353/43) leading to v1.0.4
 2. Thanks to [josephchrzempiec](https://github.com/josephchrzempiec) to report bugs leading to v1.0.5
-3. Thanks to [josephchrzempiec](https://github.com/josephchrzempiec) to create the PR [Correct platform name #2](https://github.com/khoih-prog/RP2040_RTC/pull/2) leading to v1.0.6
+3. Thanks to [Maximilian Gerhardt](https://github.com/maxgerhardt) to create the PR [Correct platform name #2](https://github.com/khoih-prog/RP2040_RTC/pull/2) leading to v1.0.6
 
 <table>
   <tr>
