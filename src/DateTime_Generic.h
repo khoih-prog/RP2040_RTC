@@ -6,7 +6,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
-  Version: 1.0.6
+  Version: 1.0.7
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -17,6 +17,7 @@
   1.0.4  K Hoang      26/06/2021 Using TimeLib instead of Time
   1.0.5  K Hoang      30/09/2021 Fix examples' issue with Nano_RP2040_Connect
   1.0.6  K Hoang      22/10/2021 Fix platform in library.json for PIO
+  1.0.7  K Hoang      01/11/2021 Fix bug in rtc_set_datetime()
  *****************************************************************************************************************************/
  
 #pragma once
@@ -463,6 +464,8 @@ typedef struct {
     tm.hour   = dt.hour();
     tm.min    = dt.minute();
     tm.sec    = dt.second();
+    
+    tm.dotw   = dt.dayOfTheWeek();
 
 #if RTC_DEBUG    
     Serial.print("Year = "); Serial.print(tm.year);

@@ -775,7 +775,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -819,7 +819,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on  RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -862,7 +862,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -889,7 +889,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -940,7 +940,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -992,7 +992,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -1053,7 +1053,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 [EWS] =========== USE_ETHERNET_LARGE ===========
 [EWS] Default SPI pinout:
@@ -1106,7 +1106,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -1139,7 +1139,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.6
+RP2040_RTC v1.0.7
 Timezone_Generic v1.7.1
 Please upgrade the firmware
 Connecting to WPA SSID: HueNet1
@@ -1205,13 +1205,16 @@ Many thanks for everyone for bug reporting, new feature suggesting, testing and 
 
 1. Thanks to [kenb2054](https://github.com/kenb2054) to report bugs in [Libraries updated to support new RP2040-based boards (RASPBERRY_PI_PICO, etc.) #43](https://forum.arduino.cc/t/libraries-updated-to-support-new-rp2040-based-boards-raspberry-pi-pico-etc/860353/43) leading to v1.0.4
 2. Thanks to [josephchrzempiec](https://github.com/josephchrzempiec) to report bugs leading to v1.0.5
-3. Thanks to [Maximilian Gerhardt](https://github.com/maxgerhardt) to create the PR [Correct platform name #2](https://github.com/khoih-prog/RP2040_RTC/pull/2) leading to v1.0.6
+3. Thanks to [Maximilian Gerhardt](https://github.com/maxgerhardt) 
+
+- to create the PR [Correct platform name #2](https://github.com/khoih-prog/RP2040_RTC/pull/2) leading to v1.0.6
+- to create perfect bug report [Library converts datetime_t incorrectly, causing example to fail #4](https://github.com/khoih-prog/RP2040_RTC/issues/4) leading to v1.0.7
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/kenb2054"><img src="https://github.com/kenb2054.png" width="100px;" alt="kenb2054"/><br /><sub><b>kenb2054</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/josephchrzempiec"><img src="https://github.com/josephchrzempiec.png" width="100px;" alt="josephchrzempiec"/><br /><sub><b>josephchrzempiec</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/maxgerhardt"><img src="https://github.com/maxgerhardt.png" width="100px;" alt="maxgerhardt"/><br /><sub><b>Maximilian Gerhardt</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/maxgerhardt"><img src="https://github.com/maxgerhardt.png" width="100px;" alt="maxgerhardt"/><br /><sub><b>⭐️ Maximilian Gerhardt</b></sub></a><br /></td>
   </tr> 
 </table>
 

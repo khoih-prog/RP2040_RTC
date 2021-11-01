@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.0.7](#releases-v107)
   * [Releases v1.0.6](#releases-v106)
   * [Releases v1.0.5](#releases-v105)
   * [Releases v1.0.4](#releases-v104)
@@ -24,6 +25,10 @@
 ---
 
 ## Changelog
+
+### Releases v1.0.7
+
+1. Fix bug in rtc_set_datetime(). Check [Library converts datetime_t incorrectly, causing example to fail #4](https://github.com/khoih-prog/RP2040_RTC/issues/4)
 
 ### Releases v1.0.6
 
