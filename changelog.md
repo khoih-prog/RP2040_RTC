@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.0.8](#releases-v108)
   * [Releases v1.0.7](#releases-v107)
   * [Releases v1.0.6](#releases-v106)
   * [Releases v1.0.5](#releases-v105)
@@ -25,6 +26,11 @@
 ---
 
 ## Changelog
+
+### Releases v1.0.8
+
+1. Update dependency on [Timezone_Generic Library](https://github.com/khoih-prog/Timezone_Generic)
+2. Update examples
 
 ### Releases v1.0.7
 

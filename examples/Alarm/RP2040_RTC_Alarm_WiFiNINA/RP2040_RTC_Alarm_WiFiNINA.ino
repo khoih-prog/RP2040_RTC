@@ -10,6 +10,7 @@
 
 #include "defines.h"
 
+// To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include <Timezone_Generic.h>             // https://github.com/khoih-prog/Timezone_Generic
 
 //////////////////////////////////////////
@@ -45,7 +46,7 @@ datetime_t alarmT;
 volatile bool alarmTriggered = false;
 
 #define ALARM_AT_SECONDS          5
-#define ALARM_REPEAT_FOREVER      true
+#define ALARM_REPEAT_FOREVER      false   //true
 
 // This is ISR. Be careful. No Serial.print here.
 void rtcCallback()

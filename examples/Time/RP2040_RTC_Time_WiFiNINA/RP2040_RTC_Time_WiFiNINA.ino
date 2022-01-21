@@ -13,6 +13,7 @@
 
 #include "defines.h"
 
+// To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include <Timezone_Generic.h>             // https://github.com/khoih-prog/Timezone_Generic
 
 //////////////////////////////////////////

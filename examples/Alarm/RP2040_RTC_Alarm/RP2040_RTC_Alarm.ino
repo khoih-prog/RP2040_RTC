@@ -13,6 +13,7 @@
 
 #include "defines.h"
 
+// To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include <Timezone_Generic.h>             // https://github.com/khoih-prog/Timezone_Generic
 
 //////////////////////////////////////////
@@ -39,9 +40,9 @@ typedef struct
 } datetime_t; 
 */
 
-// Example set at 04:00:00 Wed 23 Jun 2021 UTC or 00:00:00 Wed 23 Jun 2021 EDT
+// Example set at 05:00:00 Fri 21 Jan 2022 UTC or 00:00:00 Fri 21 Jan 2022 EST
 
-datetime_t currTime = { 2021, 6, 23, 3, 4, 0, 0 };
+datetime_t currTime = { 2022, 1, 21, 5, 5, 0, 0 };
 
 datetime_t alarmT;
 volatile bool alarmTriggered = false;
