@@ -46,7 +46,7 @@ datetime_t alarmT;
 volatile bool alarmTriggered = false;
 
 #define ALARM_AT_SECONDS          5
-#define ALARM_REPEAT_FOREVER      false   //true
+#define ALARM_REPEAT_FOREVER      true
 
 // This is ISR. Be careful. No Serial.print here.
 void rtcCallback()
