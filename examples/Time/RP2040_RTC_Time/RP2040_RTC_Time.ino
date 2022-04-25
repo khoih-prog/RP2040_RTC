@@ -60,7 +60,7 @@ void printDateTime(time_t t, const char *tz)
 void setup()
 {
   Serial.begin(115200);
-  while (!Serial);
+  while (!Serial && millis() < 5000);
 
   delay(200);
 

@@ -21,19 +21,17 @@
     #undef ETHERNET_USE_RP2040
   #endif
   #define ETHERNET_USE_RP2040      true
+  #define ETHERNET_USE_RPIPICO     true
 #endif
 
-#if ETHERNET_USE_RP2040
+#if ETHERNET_USE_RP2040 || ETHERNET_USE_RPIPICO
   
   // Default pin 5 (in Mbed) or 17 to SS/CS
   #if defined(ARDUINO_ARCH_MBED)
     // For RPI Pico using Arduino Mbed RP2040 core
     // SCK: GPIO2,  MOSI: GPIO3, MISO: GPIO4, SS/CS: GPIO5
-    // SDA: 6,  SCL: 7
-    // For Nano_RP2040_Connect using Arduino Mbed RP2040 core
-    // SDA: 14 = A4,  SCL: 19 = A5
     
-    #define USE_THIS_SS_PIN       5
+    #define USE_THIS_SS_PIN       17    //5
 
     #if defined(BOARD_NAME)
       #undef BOARD_NAME
@@ -51,8 +49,7 @@
     
   #else
     // For RPI Pico using E. Philhower RP2040 core
-    // SCK: GPIO18,  MOSI: GPIO19, MISO: GPIO16, SS/CS: GPIO17
-    // SDA: 4,  SCL: 5
+  // SCK: GPIO18,  MOSI: GPIO19, MISO: GPIO16, SS/CS: GPIO17
     #define USE_THIS_SS_PIN       17
 
   #endif
@@ -91,35 +88,28 @@
   // Check @ defined(SEEED_XIAO_M0)
   //#define USE_THIS_SS_PIN   22  //21  //5 //4 //2 //15
   
-  // Only one of the following to be true
-  #define USE_ETHERNET          false
-  #define USE_ETHERNET2         false
-  #define USE_ETHERNET3         false
-  #define USE_ETHERNET_LARGE    true
-  #define USE_ETHERNET_ESP8266  false
+  // Only one if the following to be true
+  #define USE_ETHERNET_GENERIC  true
+  #define USE_ETHERNET_ESP8266  false 
   #define USE_ETHERNET_ENC      false
   #define USE_CUSTOM_ETHERNET   false
 
-
-  #if ( USE_ETHERNET2 || USE_ETHERNET3 || USE_ETHERNET_LARGE || USE_ETHERNET_ESP8266 || USE_ETHERNET_ENC )
+  #if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ESP8266 || USE_ETHERNET_ENC )
     #ifdef USE_CUSTOM_ETHERNET
       #undef USE_CUSTOM_ETHERNET
     #endif
     #define USE_CUSTOM_ETHERNET   false //true
   #endif
 
-  #if USE_ETHERNET3
-    #include "Ethernet3.h"
-    #warning Using Ethernet3 lib
-    #define SHIELD_TYPE           "W5x00 using Ethernet3 Library"
-  #elif USE_ETHERNET2
-    #include "Ethernet2.h"
-    #warning Using Ethernet2 lib
-    #define SHIELD_TYPE           "W5x00 using Ethernet2 Library"
-  #elif USE_ETHERNET_LARGE
-    #include "EthernetLarge.h"
-    #warning Using EthernetLarge lib
-    #define SHIELD_TYPE           "W5x00 using EthernetLarge Library"
+  #if USE_ETHERNET_GENERIC
+    #define ETHERNET_LARGE_BUFFERS
+
+    #define _ETG_LOGLEVEL_                      1
+    
+    #include "Ethernet_Generic.h"
+
+    #warning Using Ethernet_Generic lib
+    #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"  
   #elif USE_ETHERNET_ESP8266
     #include "Ethernet_ESP8266.h"
     #warning Using Ethernet_ESP8266 lib
@@ -134,10 +124,13 @@
     #warning Using Custom Ethernet library. You must include a library and initialize.
     #define SHIELD_TYPE           "Custom Ethernet using Ethernet_XYZ Library"
   #else
-    #define USE_ETHERNET          true
-    #include "Ethernet.h"
-    #warning Using Ethernet lib
-    #define SHIELD_TYPE           "W5x00 using Ethernet Library"
+    #ifdef USE_ETHERNET_GENERIC
+      #undef USE_ETHERNET_GENERIC
+    #endif
+    #define USE_ETHERNET_GENERIC   true
+    #include "Ethernet_Generic.h"
+    #warning Using default Ethernet_Generic lib
+    #define SHIELD_TYPE           "W5x00 using default Ethernet_Generic Library"
   #endif
 
   // Ethernet_Shield_W5200, EtherCard, EtherSia not supported

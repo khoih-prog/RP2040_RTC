@@ -18,7 +18,7 @@
   * [Features](#features)
   * [Why using ISR-based Alarm is better](#why-using-isr-based-alarm-is-better)
   * [Currently supported Boards](#currently-supported-boards)
-  * [Important Notes about ISR](#important-notes-about-isr)
+  * [Currently supported Ethernet shields/modules](#currently-supported-ethernet-shieldsmodules)
 * [Changelog](changelog.md)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
@@ -51,13 +51,13 @@
   * [ 1. File RP2040_RTC_Time_WiFiNINA.ino](#1-file-rp2040_rtc_time_wifininaino)
   * [ 2. File defines.h](#2-file-definesh)
 * [Debug Terminal Output Samples](#debug-terminal-output-samples)
-  * [1. RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#1-rp2040_rtc_time_ethernet-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
-  * [2. RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#2-rp2040_rtc_time_ethernet-on-mbed-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
+  * [1. RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library](#1-rp2040_rtc_time_ethernet-on-raspberry_pi_pico-with-w5x00-using-Ethernet_Generic-library)
+  * [2. RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library](#2-rp2040_rtc_time_ethernet-on-mbed-raspberry_pi_pico-with-w5x00-using-Ethernet_Generic-library)
   * [3. RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library](#3-rp2040_rtc_time_wifinina-on-mbed-nano_rp2040_connect-with-wifinina-using-wifinina_generic-library)
-  * [4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#4-rp2040_rtc_alarm_ethernet-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
+  * [4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library](#4-rp2040_rtc_alarm_ethernet-on-raspberry_pi_pico-with-w5x00-using-Ethernet_Generic-library)
     * [4.1 Repeatitive Alarm](#41-repeatitive-alarm)
     * [4.2 One-shot Alarm](#42-one-shot-alarm)
-  * [5. RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library](#5-rp2040_rtc_alarm_ethernet-on-mbed-on-raspberry_pi_pico-with-w5x00-using-ethernetlarge-library)
+  * [5. RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library](#5-rp2040_rtc_alarm_ethernet-on-mbed-raspberry_pi_pico-with-w5x00-using-Ethernet_Generic-library)
     * [5.1 Repeatitive Alarm](#51-repeatitive-alarm)
     * [5.2 One-shot Alarm](#52-one-shot-alarm)
   * [6. RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library](#6-rp2040_rtc_alarm_wifinina-on-mbed-nano_rp2040_connect-with-wifinina-using-wifinina_generic-library)
@@ -113,17 +113,13 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 ### Currently supported Boards
 
-1. RP2040-based boards such as **NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc.
+1. RP2040-based boards, such as **NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico).
 
----
+#### Currently supported Ethernet shields/modules
 
-### Important Notes about ISR
+1. W5x00 using [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) library
+2. W5100S shield /module, using [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) library, such as [**WIZnet Ethernet HAT**](https://docs.wiznet.io/Product/Open-Source-Hardware/wiznet_ethernet_hat) and [**W5100S-EVB-Pico**](https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico)
 
-1. Inside the attached function, **delay() won’t work and the value returned by millis() will not increment.** Serial data received while in the function may be lost. You should declare as **volatile any variables that you modify within the attached function.**
-
-2. Typically global variables are used to pass data between an ISR and the main program. To make sure variables shared between an ISR and the main program are updated correctly, declare them as volatile.
-
-3. Don't use Serial.print(ln) function inside ISR or system will hang up.
 
 ---
 ---
@@ -132,17 +128,14 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 ## Prerequisites
 
 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
-2. [`Arduino mbed_rp2040 core 2.7.2+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-3. [`Earle Philhower's arduino-pico core v1.10.0+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+2. [`Arduino mbed_rp2040 core 3.0.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+3. [`Earle Philhower's arduino-pico core v1.13.3+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 
-4. [`Timezone_Generic library v1.9.1+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
+4. [`Timezone_Generic library v1.10.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
 5. [`WiFiNINA_Generic library v1.8.14-3+`](https://github.com/khoih-prog/WiFiNINA_Generic) to use WiFiNINA modules/shields. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic) if using `WiFiNINA_Generic` library for Nano-RP2040-Connect boards.
 
 6. Depending on which Ethernet card/module/shield you're using:
-   - [`Ethernet library v2.0.0+`](https://github.com/arduino-libraries/Ethernet) for W5100, W5200 and W5500.  [![GitHub release](https://img.shields.io/github/release/arduino-libraries/Ethernet.svg)](https://github.com/arduino-libraries/Ethernet/releases/latest)
-   - [`EthernetLarge library v2.0.0+`](https://github.com/OPEnSLab-OSU/EthernetLarge) for W5100, W5200 and W5500.
-   - [`Ethernet2 library v1.0.4+`](https://github.com/khoih-prog/Ethernet2) for W5500. [![GitHub release](https://img.shields.io/github/release/adafruit/Ethernet2.svg)](https://github.com/adafruit/Ethernet2/releases/latest)
-   - [`Ethernet3 library v1.5.5+`](https://github.com/sstaub/Ethernet3) for W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip. [![GitHub release](https://img.shields.io/github/release/sstaub/Ethernet3.svg)](https://github.com/sstaub/Ethernet3/releases/latest)
+   - [`Ethernet_Generic library v2.1.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
    - [`EthernetENC library v2.0.2+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
 
 ---
@@ -168,7 +161,7 @@ Another way to install is to:
 
 1. Install [VS Code](https://code.visualstudio.com/)
 2. Install [PlatformIO](https://platformio.org/platformio-ide)
-3. Install [**RP2040_RTC** library](https://platformio.org/lib/show/12433/RP2040_RTC) or [**RP2040_RTC** library](https://platformio.org/lib/show/12433/RP2040_RTC) by using [Library Manager](https://platformio.org/lib/show/12433/RP2040_RTC/installation). Search for **RP2040_RTC** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
+3. Install [**RP2040_RTC** library](https://registry.platformio.org/libraries/khoih-prog/RP2040_RTC) or [**RP2040_RTC** library](https://registry.platformio.org/libraries/khoih-prog/RP2040_RTC) by using [Library Manager](https://platformio.org/lib/show/12433/RP2040_RTC/installation). Search for **RP2040_RTC** in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
 4. Please visit documentation for the other options and examples at [Project Configuration File](https://docs.platformio.org/page/projectconf.html)
 
 
@@ -773,25 +766,22 @@ char pass[] = "12345678";         // your network password
 
 ### Debug Terminal Output Samples
 
-#### 1. RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 1. RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
 
-The following is the sample terminal output when running example [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet) on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+The following is the sample terminal output when running example [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet) on RASPBERRY_PI_PICO with W5100S using Ethernet_Generic Library
 
 ```
-Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
-[EWS] =========== USE_ETHERNET_LARGE ===========
+Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
+[EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
 [EWS] MISO: 16
 [EWS] SCK: 18
 [EWS] SS: 17
 [EWS] =========================
-[EWS] Board : RASPBERRY_PI_PICO , setCsPin: 17
-_pinCS = 0
-W5100 init, using SS_PIN_DEFAULT = 10, new ss_pin = 10, W5100Class::ss_pin = 17
-W5100::init: W5500, SSIZE =8192
+[EWS] RPIPICO setCsPin: 17
 =========================
 Currently Used SPI pinout:
 MOSI:19
@@ -800,54 +790,57 @@ SCK:18
 SS:17
 =========================
 Using mac index = 10
-You're connected to the network, IP = 192.168.2.94
+You're connected to the network, IP = 192.168.2.95
 Packet received
-Seconds since Jan 1 1900 = 3851712307
-Unix time = 1642723507
-The UTC time is 0:05:07
+Seconds since Jan 1 1900 = 3859851978
+Unix time = 1650863178
+The UTC time is 5:06:18
 ============================
-00:05:08 Fri 21 Jan 2022 UTC
-19:05:08 Thu 20 Jan 2022 EST
+05:06:19 Mon 25 Apr 2022 UTC
+01:06:19 Mon 25 Apr 2022 EDT
 ```
 
 ---
 
-#### 2. RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 2. RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
 
-The following is the sample terminal output when running example [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet) on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+The following is the sample terminal output when running example [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet) on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
 
 
 ```
-Start RP2040_RTC_Time_Ethernet on  RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
-[EWS] =========== USE_ETHERNET_LARGE ===========
+Start RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
+[EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
-[EWS] MOSI: 3
-[EWS] MISO: 4
-[EWS] SCK: 2
-[EWS] SS: 5
+[EWS] MOSI: 19
+[EWS] MISO: 16
+[EWS] SCK: 18
+[EWS] SS: 17
 [EWS] =========================
-[EWS] Board : MBED RASPBERRY_PI_PICO , setCsPin: 5
-_pinCS = 0
-W5100 init, using SS_PIN_DEFAULT = 5, new ss_pin = 10, W5100Class::ss_pin = 5
-W5100::init: W5500, SSIZE =8192
+[EWS] RPIPICO setCsPin: 17
 =========================
 Currently Used SPI pinout:
-MOSI:3
-MISO:4
-SCK:2
-SS:5
+MOSI:19
+MISO:16
+SCK:18
+SS:17
 =========================
-Using mac index = 19
-You're connected to the network, IP = 192.168.2.104
+Using mac index = 1
+You're connected to the network, IP = 192.168.2.102
 Packet received
-Seconds since Jan 1 1900 = 3851712307
-Unix time = 1642723507
-The UTC time is 0:05:07
+Seconds since Jan 1 1900 = 3859851547
+Unix time = 1650862747
+The UTC time is 4:59:07
 ============================
-00:05:08 Fri 21 Jan 2022 UTC
-19:05:08 Thu 20 Jan 2022 EST
+04:59:08 Mon 25 Apr 2022 UTC
+00:59:08 Mon 25 Apr 2022 EDT
+============================
+05:00:08 Mon 25 Apr 2022 UTC
+01:00:08 Mon 25 Apr 2022 EDT
+============================
+05:01:08 Mon 25 Apr 2022 UTC
+01:01:08 Mon 25 Apr 2022 EDT
 ```
 
 ---
@@ -858,42 +851,39 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
 Packet received
-Seconds since Jan 1 1900 = 3851712307
-Unix time = 1642723507
-The UTC time is 0:05:07
+Seconds since Jan 1 1900 = 3859851547
+Unix time = 1650862747
+The UTC time is 4:59:07
 ============================
-00:05:08 Fri 21 Jan 2022 UTC
-19:05:08 Thu 20 Jan 2022 EST
+04:59:08 Mon 25 Apr 2022 UTC
+00:59:08 Mon 25 Apr 2022 EDT
 ```
 
 ---
 
-#### 4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 4. RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
 
-The following is the sample terminal output when running example [RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet) on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+The following is the sample terminal output when running example [RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet) on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
 
 #### 4.1. Repeatitive Alarm
 
 ```
-Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
-[EWS] =========== USE_ETHERNET_LARGE ===========
+Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
+[EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
 [EWS] MISO: 16
 [EWS] SCK: 18
 [EWS] SS: 17
 [EWS] =========================
-[EWS] Board : RASPBERRY_PI_PICO , setCsPin: 17
-_pinCS = 0
-W5100 init, using SS_PIN_DEFAULT = 10, new ss_pin = 10, W5100Class::ss_pin = 17
-W5100::init: W5500, SSIZE =8192
+[EWS] RPIPICO setCsPin: 17
 =========================
 Currently Used SPI pinout:
 MOSI:19
@@ -901,32 +891,32 @@ MISO:16
 SCK:18
 SS:17
 =========================
-Using mac index = 2
-You're connected to the network, IP = 192.168.2.107
+Using mac index = 12
+You're connected to the network, IP = 192.168.2.99
 Packet received
-Seconds since Jan 1 1900 = 3851712307
-Unix time = 1642723507
-The UTC time is 0:05:07
+Seconds since Jan 1 1900 = 3859852325
+Unix time = 1650863525
+The UTC time is 5:12:05
 ============================
-00:05:08 Fri 21 Jan 2022 UTC
-19:05:08 Thu 20 Jan 2022 EST
+05:12:06 Mon 25 Apr 2022 UTC
+01:12:06 Mon 25 Apr 2022 EDT
 Set Repeatitive Alarm @ alarmSeconds = 5
 ============================
 Alarm @ 
-00:06:05 Fri 21 Jan 2022 UTC
-19:06:05 Thu 20 Jan 2022 EST
+05:13:05 Mon 25 Apr 2022 UTC
+01:13:05 Mon 25 Apr 2022 EDT
 ============================
-00:06:08 Fri 21 Jan 2022 UTC
-19:06:08 Thu 20 Jan 2022 EST
+05:13:06 Mon 25 Apr 2022 UTC
+01:13:06 Mon 25 Apr 2022 EDT
 ```
 
 #### 4.2. One-shot Alarm
 
 ```
-Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
-[EWS] =========== USE_ETHERNET_LARGE ===========
+Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
+[EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
 [EWS] MISO: 16
@@ -947,75 +937,72 @@ SS:17
 Using mac index = 17
 You're connected to the network, IP = 192.168.2.101
 Packet received
-Seconds since Jan 1 1900 = 3851712462
-Unix time = 1642723662
-The UTC time is 0:07:42
+Seconds since Jan 1 1900 = 3859852325
+Unix time = 1650863525
+The UTC time is 5:12:05
 ============================
-00:07:43 Fri 21 Jan 2022 UTC
-19:07:43 Thu 20 Jan 2022 EST
+05:12:06 Mon 25 Apr 2022 UTC
+01:12:06 Mon 25 Apr 2022 EDT
 Set One-time Alarm @ alarmSeconds = 5
 ============================
 Alarm @ 
-00:08:05 Fri 21 Jan 2022 UTC
-19:08:05 Thu 20 Jan 2022 EST
+05:13:05 Mon 25 Apr 2022 UTC
+01:13:05 Mon 25 Apr 2022 EDT
 ```
 
 ---
 
-#### 5. RP2040_RTC_Alarm_Ethernet on MBED on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+#### 5. RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
 
-The following is the sample terminal output when running example [RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet) on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
+The following is the sample terminal output when running example [RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet) on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
 
 #### 5.1. Repeatitive Alarm
 
 ```
-Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
-[EWS] =========== USE_ETHERNET_LARGE ===========
+Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
+[EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
-[EWS] MOSI: 3
-[EWS] MISO: 4
-[EWS] SCK: 2
-[EWS] SS: 5
+[EWS] MOSI: 19
+[EWS] MISO: 16
+[EWS] SCK: 18
+[EWS] SS: 17
 [EWS] =========================
-[EWS] Board : MBED RASPBERRY_PI_PICO , setCsPin: 5
-_pinCS = 0
-W5100 init, using SS_PIN_DEFAULT = 5, new ss_pin = 10, W5100Class::ss_pin = 5
-W5100::init: W5500, SSIZE =8192
+[EWS] RPIPICO setCsPin: 17
 =========================
 Currently Used SPI pinout:
-MOSI:3
-MISO:4
-SCK:2
-SS:5
+MOSI:19
+MISO:16
+SCK:18
+SS:17
 =========================
-Using mac index = 3
-You're connected to the network, IP = 192.168.2.119
+Using mac index = 19
+You're connected to the network, IP = 192.168.2.104
 Packet received
-Seconds since Jan 1 1900 = 3851712307
-Unix time = 1642723507
-The UTC time is 0:05:07
+Seconds since Jan 1 1900 = 3859852627
+Unix time = 1650863827
+The UTC time is 5:17:07
 ============================
-00:05:08 Fri 21 Jan 2022 UTC
-19:05:08 Thu 20 Jan 2022 EST
+05:17:08 Mon 25 Apr 2022 UTC
+01:17:08 Mon 25 Apr 2022 EDT
 Set Repeatitive Alarm @ alarmSeconds = 5
 ============================
 Alarm @ 
-00:06:05 Fri 21 Jan 2022 UTC
-19:06:05 Thu 20 Jan 2022 EST
+05:18:05 Mon 25 Apr 2022 UTC
+01:18:05 Mon 25 Apr 2022 EDT
 ============================
-00:06:08 Fri 21 Jan 2022 UTC
-19:06:08 Thu 20 Jan 2022 EST
+05:18:08 Mon 25 Apr 2022 UTC
+01:18:08 Mon 25 Apr 2022 EDT
 ```
 
 #### 5.2. One-shot Alarm
 
 ```
-Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using EthernetLarge Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
-[EWS] =========== USE_ETHERNET_LARGE ===========
+Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
+[EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
 [EWS] MISO: 16
@@ -1036,17 +1023,17 @@ SS:17
 Using mac index = 17
 You're connected to the network, IP = 192.168.2.101
 Packet received
-Seconds since Jan 1 1900 = 3851712462
-Unix time = 1642723662
-The UTC time is 0:07:42
+Seconds since Jan 1 1900 = 3859852627
+Unix time = 1650863827
+The UTC time is 5:17:07
 ============================
-00:07:43 Fri 21 Jan 2022 UTC
-19:07:43 Thu 20 Jan 2022 EST
+05:17:08 Mon 25 Apr 2022 UTC
+01:17:08 Mon 25 Apr 2022 EDT
 Set One-time Alarm @ alarmSeconds = 5
 ============================
 Alarm @ 
-00:08:05 Fri 21 Jan 2022 UTC
-19:08:05 Thu 20 Jan 2022 EST
+05:18:05 Mon 25 Apr 2022 UTC
+01:18:05 Mon 25 Apr 2022 EDT
 ```
 
 ---
@@ -1059,25 +1046,25 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.125
 Packet received
-Seconds since Jan 1 1900 = 3851712307
-Unix time = 1642723507
-The UTC time is 0:05:07
+Seconds since Jan 1 1900 = 3859852627
+Unix time = 1650863827
+The UTC time is 5:17:07
 ============================
-00:05:08 Fri 21 Jan 2022 UTC
-19:05:08 Thu 20 Jan 2022 EST
+05:17:08 Mon 25 Apr 2022 UTC
+01:17:08 Mon 25 Apr 2022 EDT
 Set Repeatitive Alarm @ alarmSeconds = 5
 ============================
 Alarm @ 
-00:06:05 Fri 21 Jan 2022 UTC
-19:06:05 Thu 20 Jan 2022 EST
+05:18:05 Mon 25 Apr 2022 UTC
+01:18:05 Mon 25 Apr 2022 EDT
 ============================
-00:06:08 Fri 21 Jan 2022 UTC
-19:06:08 Thu 20 Jan 2022 EST
+05:18:08 Mon 25 Apr 2022 UTC
+01:18:08 Mon 25 Apr 2022 EDT
 ```
 
 #### 6.2. One-shot Alarm
@@ -1085,22 +1072,22 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.0.8
-Timezone_Generic v1.9.0
+RP2040_RTC v1.1.0
+Timezone_Generic v1.10.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.125
 Packet received
-Seconds since Jan 1 1900 = 3851712462
-Unix time = 1642723662
-The UTC time is 0:07:42
+Seconds since Jan 1 1900 = 3859852627
+Unix time = 1650863827
+The UTC time is 5:17:07
 ============================
-00:07:43 Fri 21 Jan 2022 UTC
-19:07:43 Thu 20 Jan 2022 EST
+05:17:08 Mon 25 Apr 2022 UTC
+01:17:08 Mon 25 Apr 2022 EDT
 Set One-time Alarm @ alarmSeconds = 5
 ============================
 Alarm @ 
-00:08:05 Fri 21 Jan 2022 UTC
-19:08:05 Thu 20 Jan 2022 EST
+05:18:05 Mon 25 Apr 2022 UTC
+01:18:05 Mon 25 Apr 2022 EDT
 ```
 
 ---
@@ -1136,6 +1123,9 @@ Submit issues to: [RP2040_RTC issues](https://github.com/khoih-prog/RP2040_RTC/i
 2. Add Version String 
 3. Add Table of Contents
 4. Add simple examples with manual time input
+5. Use new [Ethernet_Generic library](https://github.com/khoih-prog/Ethernet_Generic) as default for W5x00.
+6. Add support to `SPI1` for `RP2040` using [`Earle Philhower's arduino-pico` core](https://github.com/earlephilhower/arduino-pico)
+7. Add support to WIZNet W5100S, such as  [**WIZnet Ethernet HAT**](https://docs.wiznet.io/Product/Open-Source-Hardware/wiznet_ethernet_hat) and [**W5100S-EVB-Pico**](https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico)
 
 ---
 ---
