@@ -7,7 +7,7 @@
   Built by Khoi Hoang https://github.com/khoih-prog/RP2040_RTC
   Licensed under MIT license
   
-  Version: 1.1.0
+  Version: 1.1.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -21,6 +21,7 @@
   1.0.7  K Hoang      01/11/2021 Fix bug in rtc_set_datetime()
   1.0.8  K Hoang      20/01/2022 Update dependency
   1.1.0  K Hoang      25/04/2022 Use new Ethernet_Generic library. Add support to W5100S
+  1.1.1  K Hoang      25/09/2022 Add support to RP2040W using CYW43439 WiFi with arduino-pico core
  *****************************************************************************************************************************/
  
 #pragma once

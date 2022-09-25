@@ -20,6 +20,7 @@
   * [Why using ISR-based Alarm is better](#why-using-isr-based-alarm-is-better)
   * [Currently supported Boards](#currently-supported-boards)
   * [Currently supported Ethernet shields/modules](#currently-supported-ethernet-shieldsmodules)
+  * [Currently supported WiFi shields/modules](#currently-supported-WiFi-shieldsmodules)
 * [Changelog](changelog.md)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
@@ -45,9 +46,11 @@
   * [ 1. RP2040_RTC_Alarm](examples/Alarm/RP2040_RTC_Alarm)
   * [ 2. RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet)
   * [ 3. RP2040_RTC_Alarm_WiFiNINA](examples/Alarm/RP2040_RTC_Alarm_WiFiNINA)
-  * [ 4. RP2040_RTC_Time](examples/Time/RP2040_RTC_Time)
-  * [ 5. RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet)
-  * [ 6. RP2040_RTC_Time_WiFiNINA](examples/Time/RP2040_RTC_Time_WiFiNINA)
+  * [ 4. RP2040_RTC_Alarm_RP2040W](examples/Alarm/RP2040_RTC_Alarm_RP2040W)
+  * [ 5. RP2040_RTC_Time](examples/Time/RP2040_RTC_Time)
+  * [ 6. RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet)
+  * [ 7. RP2040_RTC_Time_WiFiNINA](examples/Time/RP2040_RTC_Time_WiFiNINA)
+  * [ 8. RP2040_RTC_Time_RP2040W](examples/Time/RP2040_RTC_Time_RP2040W)
 * [Example RP2040_RTC_Time_WiFiNINA](#example-rp2040_rtc_time_wifinina)
   * [ 1. File RP2040_RTC_Time_WiFiNINA.ino](#1-file-rp2040_rtc_time_wifininaino)
   * [ 2. File defines.h](#2-file-definesh)
@@ -114,12 +117,17 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 
 ### Currently supported Boards
 
-1. RP2040-based boards, such as **NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico).
+1. RP2040-based boards, such as **NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, RASPBERRY_PI_PICO_W, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico)
 
 #### Currently supported Ethernet shields/modules
 
 1. W5x00 using [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) library
 2. W5100S shield /module, using [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) library, such as [**WIZnet Ethernet HAT**](https://docs.wiznet.io/Product/Open-Source-Hardware/wiznet_ethernet_hat) and [**W5100S-EVB-Pico**](https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico)
+
+#### Currently supported WiFi shields/modules
+
+1. `WiFiNINA` using [`WiFiNINA_Generic`](https://github.com/khoih-prog/WiFiNINA_Generic) library
+2. `CYW43439 WiFi` with RASPBERRY_PI_PICO_W using [arduino-pico](https://github.com/earlephilhower/arduino-pico) core
 
 
 ---
@@ -129,15 +137,15 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 ## Prerequisites
 
 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
-2. [`Arduino mbed_rp2040 core 3.0.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-3. [`Earle Philhower's arduino-pico core v1.13.3+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+2. [`Arduino mbed_rp2040 core 3.3.0+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+3. [`Earle Philhower's arduino-pico core v2.5.4+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 
-4. [`Timezone_Generic library v1.10.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/Timezone_Generic.svg?)](https://www.ardu-badge.com/Timezone_Generic)
-5. [`WiFiNINA_Generic library v1.8.14-3+`](https://github.com/khoih-prog/WiFiNINA_Generic) to use WiFiNINA modules/shields. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic) if using `WiFiNINA_Generic` library for Nano-RP2040-Connect boards.
+4. [`Timezone_Generic library v1.10.0+`](https://github.com/khoih-prog/Timezone_Generic) to use examples using Timezone. [![GitHub release](https://img.shields.io/github/release/khoih-prog/Timezone_Generic.svg)](https://github.com/khoih-prog/Timezone_Generic/releases/latest)
+5. [`WiFiNINA_Generic library v1.8.14-6+`](https://github.com/khoih-prog/WiFiNINA_Generic) to use WiFiNINA modules/shields. [![GitHub release](https://img.shields.io/github/release/khoih-prog/WiFiNINA_Generic.svg)](https://github.com/khoih-prog/WiFiNINA_Generic/releases/latest)
 
 6. Depending on which Ethernet card/module/shield you're using:
    - [`Ethernet_Generic library v2.1.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
-   - [`EthernetENC library v2.0.2+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
+   - [`EthernetENC library v2.0.3+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
 
 ---
 ---
@@ -411,9 +419,11 @@ class DateTime
  1. [RP2040_RTC_Alarm](examples/Alarm/RP2040_RTC_Alarm)
  2. [RP2040_RTC_Alarm_Ethernet](examples/Alarm/RP2040_RTC_Alarm_Ethernet)
  3. [RP2040_RTC_Alarm_WiFiNINA](examples/Alarm/RP2040_RTC_Alarm_WiFiNINA)
- 4. [RP2040_RTC_Time](examples/Time/RP2040_RTC_Time)
- 5. [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet)
- 6. [RP2040_RTC_Time_WiFiNINA](examples/Time/RP2040_RTC_Time_WiFiNINA)
+ 4. [RP2040_RTC_Alarm_RP2040W](examples/Alarm/RP2040_RTC_Alarm_RP2040W) **New**
+ 5. [RP2040_RTC_Time](examples/Time/RP2040_RTC_Time)
+ 6. [RP2040_RTC_Time_Ethernet](examples/Time/RP2040_RTC_Time_Ethernet)
+ 7. [RP2040_RTC_Time_WiFiNINA](examples/Time/RP2040_RTC_Time_WiFiNINA)
+ 8. [RP2040_RTC_Time_RP2040W](examples/Time/RP2040_RTC_Time_RP2040W) **New**
 
 ---
 ---
@@ -439,7 +449,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
@@ -476,7 +486,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
@@ -518,7 +528,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Tim
 
 ```
 Start RP2040_RTC_Time_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.153
@@ -541,7 +551,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
@@ -581,7 +591,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
@@ -627,7 +637,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
@@ -667,7 +677,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_Ethernet on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
@@ -713,7 +723,7 @@ The following is the sample terminal output when running example [RP2040_RTC_Ala
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.125
@@ -739,7 +749,7 @@ Alarm @
 
 ```
 Start RP2040_RTC_Alarm_WiFiNINA on MBED NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-RP2040_RTC v1.1.0
+RP2040_RTC v1.1.1
 Timezone_Generic v1.10.0
 Connecting to WPA SSID: HueNet1
 You're connected to the network, IP = 192.168.2.125
@@ -793,6 +803,7 @@ Submit issues to: [RP2040_RTC issues](https://github.com/khoih-prog/RP2040_RTC/i
 5. Use new [Ethernet_Generic library](https://github.com/khoih-prog/Ethernet_Generic) as default for W5x00.
 6. Add support to `SPI1` for `RP2040` using [`Earle Philhower's arduino-pico` core](https://github.com/earlephilhower/arduino-pico)
 7. Add support to WIZNet W5100S, such as  [**WIZnet Ethernet HAT**](https://docs.wiznet.io/Product/Open-Source-Hardware/wiznet_ethernet_hat) and [**W5100S-EVB-Pico**](https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico)
+8. Add support to `RP2040W` using `CYW43439 WiFi` with [`Earle Philhower's arduino-pico` core](https://github.com/earlephilhower/arduino-pico)
 
 ---
 ---
