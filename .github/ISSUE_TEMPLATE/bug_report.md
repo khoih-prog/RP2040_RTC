@@ -35,26 +35,27 @@ If applicable, add screenshots to help explain your problem.
 
 Please ensure to specify the following:
 
-* Arduino IDE version (e.g. 1.8.15) or Platform.io version
-* `RP2040` Core Version (e.g. Arduino-mbed RP2040 v2.1.0 or arduino-pico core v1.8.4)
-* `RP2040` Board type (e.g. NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040, GENERIC_RP2040, etc.)
+* Arduino IDE version (e.g. 1.8.19) or Platform.io version
+* `RP2040` Core Version (e.g. Arduino-mbed RP2040 v3.3.0 or arduino-pico core v2.5.4)
+* `RP2040` Board type (e.g. NANO_RP2040_CONNECT, RASPBERRY_PI_PICO, RASPBERRY_PI_PICO_W, ADAFRUIT_FEATHER_RP2040, GENERIC_RP2040, etc.)
 * Contextual information (e.g. what you were trying to achieve)
 * Simplest possible steps to reproduce
 * Anything that might be relevant in your opinion, such as:
   * Operating system (Windows, Ubuntu, etc.) and the output of `uname -a`
   * Network configuration
-  
+
+
 ### Example
 
 ```
-Arduino IDE version: 1.8.15
-Arduino-mbed RP2040 v2.1.0
+Arduino IDE version: 1.8.19
+Arduino-mbed RP2040 v3.3.0
 NANO_RP2040_CONNECT Module
 OS: Ubuntu 20.04 LTS
-Linux xy-Inspiron-3593 5.4.0-74-generic #83-Ubuntu SMP Sat May 8 02:35:39 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+Linux xy-Inspiron-3593 5.15.0-46-generic #49~20.04.1-Ubuntu SMP Thu Aug 4 19:15:44 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 
 Context:
-I encountered a crash while using TimerInterrupt.
+I encountered a crash while using this library
 
 Steps to reproduce:
 1. ...
