@@ -405,7 +405,7 @@ char timeServer[]         = "time.nist.gov";  // NTP server
 unsigned int localPort    = 2390;             // local port to listen for UDP packets
 
 const int NTP_PACKET_SIZE = 48;       // NTP timestamp is in the first 48 bytes of the message
-const int UDP_TIMEOUT     = 2000;     // timeout in miliseconds to wait for an UDP packet to arrive
+const int UDP_TIMEOUT     = 2000;     // timeout in milliseconds to wait for an UDP packet to arrive
 
 byte packetBuffer[NTP_PACKET_SIZE];   // buffer to hold incoming and outgoing packets
 
@@ -484,7 +484,7 @@ void getNTPTime()
       time_t epoch_t = epoch;
 
       // set the system time to UTC
-      // warning: assumes that compileTime() returns US EDT
+      // warning: assumes that `compileTime()` returns US EDT
       // adjust the following line accordingly if you're in another time zone
       setTime(epoch_t);
 
